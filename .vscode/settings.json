@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/8cebfa5d-e54d-4c8f-a84b-ce811ac71951/resourceGroups/appsvc_windows_centralus/providers/Microsoft.Web/sites/Modas-Client-JWH",
+    "appService.deploySubpath": "."
+}
