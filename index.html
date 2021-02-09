@@ -16,9 +16,16 @@
   </style>
 </head>
 <body>
-   <!-- navbar -->
-   <nav class="navbar fixed-top navbar-light" style="background-color:gray;">
+  <!-- toasts -->
+  <div role="alert" aria-live="assertive" aria-atomic="true" style="position:fixed;top:65px;right:10px;min-height:200px;">
+    <div style="position:absolute;top:0;right:0;" id="toast_container">
+      <!-- toast container -->
+    </div>
+  </div>
+  <!-- navbar -->
+  <nav class="navbar fixed-top navbar-light" style="background-color:#dedede;">
     <div class="navbar-brand">
+      <i class="fas fa-shield-alt"></i>
       <span class="d-inline d-md-none">MODAS</span> 
       <span class="d-none d-md-inline" style="font-variant:small-caps;">Moving Object Detection Alert System</span>
     </div>
@@ -34,16 +41,17 @@
     </ul>
     <button disabled id="auto-refresh" type="button" class="btn btn-primary" data-val="false">
       <i class="far fa-square"></i> Auto Refresh
+    </button>
   </nav>
   <!-- content -->
   <div class="container" id="content" style="display:none;margin-top:65px;">
     <table class="table table-sm table-striped table-shadow">
-      <thead class="bg-info text-white">
-        <tr><th class="text-center">Flag</th><th>Date</th><th>Time</th><th>Location</th></tr>
-    </thead>
-    <tbody>
-        <!-- Event data here -->
-    </tbody>
+      <thead class="bg-success text-white">
+          <tr><th class="text-center">Flag</th><th>Date</th><th>Time</th><th>Location</th></tr>
+      </thead>
+      <tbody>
+          <!-- Event data here -->
+      </tbody>
     </table>
     <!-- use AJAX to navigate -->
     <div class="row mb-3">
@@ -62,7 +70,8 @@
         <button disabled id="last" class="btn btn-outline-secondary"><span class="d-none d-md-inline">Last </span><i class="fas fa-angle-double-right"></i></button>
       </div>
     </div>
-</div>
+  </div>
+
   <!-- modal for login -->
   <div class="modal" tabindex="-1" role="dialog" id="signInModal">
     <div class="modal-dialog" role="document">
@@ -94,10 +103,11 @@
 
   <!-- jQuery framework -->
   <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <!-- bootstrap -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script>
   <!-- js-cookie -->
   <script src="js-cookie.min.js"></script>
   <!-- custom javascript -->
-   <script src="client.js"></script>
+  <script src="client.js"></script>
 </body>
 </html>
