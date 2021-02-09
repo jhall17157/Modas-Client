@@ -14,10 +14,6 @@ $(function () {
       // hide sign in link, show sign out link
       $('#signIn').hide();
       $('#signOut').show();
-      // enable auto-refresh button
-      $("#auto-refresh").prop( "disabled", false );
-      // initialize auto-refresh
-      initAutoRefresh()
     } else {
       // show sign in link, hide sign out link
       $('#signIn').show();
@@ -32,6 +28,7 @@ $(function () {
       headers: { "Authorization": 'Bearer ' + Cookies.get('token') },
       url: "https://modas-api.azurewebsites.net/api/event/pagesize/10/page/" + page,
       success: function (response, textStatus, jqXhr) {
+        //console.log(response);
         showTableBody(response.events);
         showPagingInfo(response.pagingInfo);
         initButtons();
@@ -42,7 +39,7 @@ $(function () {
         // log the error to the console
         // check for 401 - Unauthorized
         if (jqXHR.status == 401){
-          $('#signOut a').click();
+          console.log("token expired");
         }
       }
     });
@@ -53,6 +50,7 @@ $(function () {
       url: "https://modas-api.azurewebsites.net/api/event/count",
       success: function (response, textStatus, jqXhr) {
         if (response != $('#total').html()) {
+          console.log("success");
           // Toast
           toast("Motion Detected", "New motion alert detected!", "fas fa-user-secret");
           // play sound effect
@@ -158,10 +156,6 @@ $(function () {
     if ($('#auto-refresh').data('val')) {
       // display checked icon
       $('#auto-refresh i').removeClass('fa-square').addClass('fa-check-square');
-      // if the timer is on, clear it (this is probably unnecessary)
-      if (refreshInterval) {
-        clearInterval(refreshInterval);
-      }
       // start timer
       refreshInterval = setInterval(refreshEvents, 2000);
     } else {
@@ -244,12 +238,6 @@ $(function () {
     // hide sign out link, show sign in link
     $('#signIn').show();
     $('#signOut').hide();
-    // disable auto-refresh button
-    $("#auto-refresh").prop( "disabled", true );
-    // if timer is running, clear it
-    if (refreshInterval){
-      clearInterval(refreshInterval);
-    }
   });
 
   $('#submitButton').on('click', function(e){
@@ -274,7 +262,7 @@ $(function () {
       // verify username and password using the token api
       $.ajax({
         headers: { 'Content-Type': 'application/json' },
-        url: "https://moda-sapi.azurewebsites.net/api/token",
+        url: "https://modas-api.azurewebsites.net/api/token",
         type: 'post',
         data: JSON.stringify({ "username": $('#username').val(), "password": $('#password').val() }),
         success: function (data) {
